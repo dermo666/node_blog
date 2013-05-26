@@ -1,6 +1,6 @@
 var articleCounter = 1;
 
-ArticleProvider = function(){};
+ArticleProvider = function() {};
 ArticleProvider.prototype.dummyData = [];
 
 ArticleProvider.prototype.findAll = function(callback) {
@@ -9,8 +9,8 @@ ArticleProvider.prototype.findAll = function(callback) {
 
 ArticleProvider.prototype.findById = function(id, callback) {
   var result = null;
-  for(var i =0;i<this.dummyData.length;i++) {
-    if( this.dummyData[i]._id == id ) {
+  for (var i =0;i<this.dummyData.length;i++) {
+    if ( this.dummyData[i]._id == id ) {
       result = this.dummyData[i];
       break;
     }
@@ -21,22 +21,24 @@ ArticleProvider.prototype.findById = function(id, callback) {
 ArticleProvider.prototype.save = function(articles, callback) {
   var article = null;
 
-  if( typeof(articles.length)=="undefined")
+  if (typeof(articles.length) == "undefined")
     articles = [articles];
 
-  for( var i =0;i< articles.length;i++ ) {
+  for (var i=0; i< articles.length; i++) {
     article = articles[i];
     article._id = articleCounter++;
     article.created_at = new Date();
 
-    if( article.comments === undefined )
+    if (article.comments === undefined)
       article.comments = [];
 
-    for(var j =0;j< article.comments.length; j++) {
+    for (var j=0; j< article.comments.length; j++) {
       article.comments[j].created_at = new Date();
     }
-    this.dummyData[this.dummyData.length]= article;
+    
+    this.dummyData[this.dummyData.length] = article;
   }
+  
   callback(null, articles);
 };
 
